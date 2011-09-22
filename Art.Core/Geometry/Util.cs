@@ -226,6 +226,36 @@ namespace Art.Core.Geometry
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="val"></param>
+		/// <returns></returns>
+		public static int Floor2Int (double val)
+		{
+			return (int)Math.Floor (val);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="val"></param>
+		/// <returns></returns>
+		public static int Ceil2Int (double val)
+		{
+			return (int)Math.Ceiling (val);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="val"></param>
+		/// <returns></returns>
+		public static int Double2Int (double val)
+		{
+			return (int)val;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="v"></param>
 		/// <returns></returns>
 		public static double SphericalTheta (Vector v)

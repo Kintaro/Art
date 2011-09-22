@@ -29,6 +29,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Irony">
+      <HintPath>..\Libs\Irony.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -38,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Api.cs" />
     <Compile Include="Geometry\BoundingBox.cs" />
     <Compile Include="Geometry\DifferentialGeometry.cs" />
     <Compile Include="Geometry\Matrix.cs" />
@@ -47,13 +51,16 @@
     <Compile Include="Geometry\Point.cs" />
     <Compile Include="Geometry\Ray.cs" />
     <Compile Include="Geometry\RayDifferential.cs" />
+    <Compile Include="Geometry\Transform.cs" />
     <Compile Include="Geometry\Util.cs" />
     <Compile Include="Geometry\Vector.cs" />
+    <Compile Include="Interfaces\CameraSample.cs" />
     <Compile Include="Interfaces\ICamera.cs" />
     <Compile Include="Interfaces\IIntegrator.cs" />
     <Compile Include="Interfaces\Intersection.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Interfaces\ISampler.cs" />
+    <Compile Include="Interfaces\ISurfaceIntegrator.cs" />
     <Compile Include="Interfaces\Sample.cs" />
     <Compile Include="PluginSystem\Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

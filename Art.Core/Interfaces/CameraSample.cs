@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Art.Core.Interfaces
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Sample : CameraSample
-    {
-
-    }
+	public class CameraSample
+	{
+		public double ImageX;
+		public double ImageY;
+		public double LensU;
+		public double LensV;
+		public double Time;
+	}
 }

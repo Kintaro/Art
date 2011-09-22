@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Art.Core.Interfaces
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Sample : CameraSample
-    {
-
-    }
+	/// <summary>
+	/// 
+	/// </summary>
+	public interface ISurfaceIntegrator : IIntegrator
+	{
+	}
 }

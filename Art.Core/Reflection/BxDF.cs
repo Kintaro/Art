@@ -107,7 +107,7 @@ namespace Art.Core.Reflection
 		/// <returns></returns>
 		public virtual Spectrum Rho (int nSamples, double[] samples1, double[] samples2)
 		{
-			Spectrum r = new Spectrum ();
+			var r = new Spectrum ();
 			for (var i = 0; i < nSamples; ++i)
 			{
 				var wo = MonteCarlo.UniformSampleHemisphere (samples1[2 * i], samples1[2 * i + 1]);
