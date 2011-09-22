@@ -42,20 +42,20 @@ namespace Art.Core.Geometry
 		/// <summary>
 		/// 
 		/// </summary>
-		private BoundingBox bound;
+		private BoundingBox bound = new BoundingBox ();
 		/// <summary>
 		/// 
 		/// </summary>
-		private OctNode<NodeData> root;
+		private OctNode<NodeData> root = new OctNode<NodeData> ();
 
 		/// <summary>
 		/// 
 		/// </summary>
 		/// <param name="dataItem"></param>
 		/// <param name="dataBound"></param>
-		public void Add (NodeData dataItem, BoundingBox dataBound)
+		public async Task Add (NodeData dataItem, BoundingBox dataBound)
 		{
-			this.AddPrivate (root, bound, dataItem, dataBound, Util.DistanceSquared (dataBound.pMin, dataBound.pMax));
+			await this.AddPrivate (root, bound, dataItem, dataBound, Util.DistanceSquared (dataBound.pMin, dataBound.pMax));
 		}
 
 		/// <summary>
@@ -94,7 +94,7 @@ namespace Art.Core.Geometry
 		/// <param name="dataBound"></param>
 		/// <param name="diag2"></param>
 		/// <param name="depth"></param>
-		private void AddPrivate (OctNode<NodeData> node, BoundingBox nodeBound, NodeData dataItem, BoundingBox dataBound, double diag2, int depth = 0)
+		private async Task AddPrivate (OctNode<NodeData> node, BoundingBox nodeBound, NodeData dataItem, BoundingBox dataBound, double diag2, int depth = 0)
 		{
 			if (depth == maxDepth ||
 				Util.DistanceSquared (nodeBound.pMin, nodeBound.pMax) < diag2)
@@ -123,7 +123,7 @@ namespace Art.Core.Geometry
 				if (node.Children[child] == null)
 					node.Children[child] = new OctNode<NodeData> ();
 				var childBound = this.OctreeChildBound (child, nodeBound, pMid);
-				this.AddPrivate (node.Children[child], childBound, dataItem, dataBound, diag2, depth + 1);
+				await this.AddPrivate (node.Children[child], childBound, dataItem, dataBound, diag2, depth + 1);
 			}
 		}
 

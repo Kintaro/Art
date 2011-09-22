@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Art.Core.Interfaces
 {
+	/// <summary>
+	/// 
+	/// </summary>
 	public interface IRenderer
 	{
 

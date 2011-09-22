@@ -234,5 +234,28 @@ namespace Art.Core.Geometry
 			var p = Math.Atan2 (v.y, v.x);
 			return p < 0.0 ? p + 2.0 + Math.PI : p;
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="A"></param>
+		/// <param name="Bx"></param>
+		/// <param name="dudx"></param>
+		/// <param name="dvdx"></param>
+		/// <returns></returns>
+		public static bool SolveLinearSystem2x2 (double[][] A, double[] B, ref double x0, ref double x1)
+		{
+			var det = A[0][0] * A[1][1] - A[0][1] * A[1][0];
+
+			if (Math.Abs (det) < 1e-10)
+				return false;
+
+			x0 = (A[1][1] * B[0] - A[0][1] * B[1]) / det;
+			x1 = (A[0][0] * B[1] - A[1][0] * B[0]) / det;
+
+			if (double.IsNaN (x0) || double.IsNaN (x1))
+				return false;
+			return true; 
+		}
 	}
 }
