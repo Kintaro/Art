@@ -41,6 +41,7 @@
     <Compile Include="Geometry\BoundingBox.cs" />
     <Compile Include="Geometry\DifferentialGeometry.cs" />
     <Compile Include="Geometry\Matrix.cs" />
+    <Compile Include="Geometry\MonteCarlo.cs" />
     <Compile Include="Geometry\Normal.cs" />
     <Compile Include="Geometry\Octree.cs" />
     <Compile Include="Geometry\Point.cs" />
@@ -50,11 +51,14 @@
     <Compile Include="Geometry\Vector.cs" />
     <Compile Include="Interfaces\ICamera.cs" />
     <Compile Include="Interfaces\IIntegrator.cs" />
+    <Compile Include="Interfaces\Intersection.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Interfaces\ISampler.cs" />
     <Compile Include="Interfaces\Sample.cs" />
     <Compile Include="PluginSystem\Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reflection\BSDF.cs" />
+    <Compile Include="Reflection\BxDF.cs" />
     <Compile Include="Scene.cs" />
     <Compile Include="Spectra\Spectrum.cs" />
   </ItemGroup>

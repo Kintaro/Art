@@ -15,6 +15,15 @@ namespace Art.Core.Geometry
 		/// <summary>
 		/// 
 		/// </summary>
+		public const double InvPI = 1.0 / Math.PI;
+		/// <summary>
+		/// 
+		/// </summary>
+		public const double InvTwoPI = 1.0 / (2.0 * Math.PI);
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="a"></param>
 		/// <param name="b"></param>
 		/// <returns></returns>
@@ -193,7 +202,7 @@ namespace Art.Core.Geometry
 		/// <param name="low"></param>
 		/// <param name="high"></param>
 		/// <returns></returns>
-		public static double Clamp(double val, double low, double high) 
+		public static double Clamp (double val, double low, double high)
 		{
 			if (val < low) return low;
 			else if (val > high) return high;
@@ -255,7 +264,63 @@ namespace Art.Core.Geometry
 
 			if (double.IsNaN (x0) || double.IsNaN (x1))
 				return false;
-			return true; 
+			return true;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="A"></param>
+		/// <param name="B"></param>
+		/// <param name="C"></param>
+		/// <param name="t0"></param>
+		/// <param name="t1"></param>
+		/// <returns></returns>
+		public static bool Quadratic (double A, double B, double C, ref double t0, ref double t1)
+		{
+			var discrim = B * B - 4.0 * A * C;
+
+			if (discrim <= 0.0)
+				return false;
+
+			var rootDiscrim = Math.Sqrt (discrim);
+
+			var q = 0.0;
+			if (B < 0) q = -.5f * (B - rootDiscrim);
+			else q = -.5f * (B + rootDiscrim);
+
+			t0 = q / A;
+			t1 = C / q;
+
+			if (t0 > t1)
+			{
+				var temp = t0;
+				t0 = t1;
+				t1 = temp;
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="w"></param>
+		/// <param name="wp"></param>
+		/// <returns></returns>
+		public static bool SameHemisphere(Vector w, Vector wp) 
+		{
+			return w.z * wp.z > 0.0;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="w"></param>
+		/// <returns></returns>
+		public static double AbsCosTheta(Vector w) 
+		{
+			return Math.Abs (w.z); ;
 		}
 	}
 }
