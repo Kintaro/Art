@@ -41,6 +41,7 @@
     <Compile Include="Geometry\BoundingBox.cs" />
     <Compile Include="Geometry\Matrix.cs" />
     <Compile Include="Geometry\Normal.cs" />
+    <Compile Include="Geometry\Octree.cs" />
     <Compile Include="Geometry\Point.cs" />
     <Compile Include="Geometry\Ray.cs" />
     <Compile Include="Geometry\RayDifferential.cs" />
