@@ -16,26 +16,89 @@ namespace Art.Core.Spectra
 		/// 
 		/// </summary>
 		public const int NumberOfSpectralSamples = 30;
+		/// <summary>
+		/// 
+		/// </summary>
 		private const int sampledLambdaStart = 400;
+		/// <summary>
+		/// 
+		/// </summary>
 		private const int sampledLambdaEnd = 700;
+		/// <summary>
+		/// 
+		/// </summary>
 		private const int nRGB2SpectSamples = 32;
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum X = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum Y = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum Z = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbRefl2SpectWhite = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbRefl2SpectCyan = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbRefl2SpectMagenta = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbRefl2SpectYellow = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbRefl2SpectRed = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbRefl2SpectGreen = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbRefl2SpectBlue = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbIllum2SpectWhite = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbIllum2SpectCyan = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbIllum2SpectMagenta = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbIllum2SpectYellow = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbIllum2SpectRed = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbIllum2SpectGreen = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static SampledSpectrum rgbIllum2SpectBlue = new SampledSpectrum ();
+		/// <summary>
+		/// 
+		/// </summary>
 		public static double yint;
 
 		/// <summary>
@@ -47,9 +110,12 @@ namespace Art.Core.Spectra
 		{
 		}
 
+		/// <summary>
+		/// 
+		/// </summary>
 		public static void Init ()
 		{
-			for (var i = 0; i < NumberOfSpectralSamples; ++i)
+			Parallel.For (0, NumberOfSpectralSamples, new ParallelOptions { MaxDegreeOfParallelism = Api.NumberOfCores }, i =>
 			{
 				var wl0 = Util.Lerp ((double)i / (double)(NumberOfSpectralSamples),
 								 sampledLambdaStart, sampledLambdaEnd);
@@ -59,8 +125,8 @@ namespace Art.Core.Spectra
 				Y.c[i] = Spectrum.AverageSpectrumSamples (SpectrumCIE.CIE_Lambda, SpectrumCIE.CIE_Y, SpectrumCIE.nCIESamples, wl0, wl1);
 				Z.c[i] = Spectrum.AverageSpectrumSamples (SpectrumCIE.CIE_Lambda, SpectrumCIE.CIE_Z, SpectrumCIE.nCIESamples, wl0, wl1);
 				yint += Y.c[i];
-			}
-			for (var i = 0; i < NumberOfSpectralSamples; ++i)
+			});
+			Parallel.For (0, NumberOfSpectralSamples, new ParallelOptions { MaxDegreeOfParallelism = Api.NumberOfCores }, i =>
 			{
 				var wl0 = Util.Lerp ((double)(i) / (double)(NumberOfSpectralSamples),
 								 sampledLambdaStart, sampledLambdaEnd);
@@ -95,6 +161,20 @@ namespace Art.Core.Spectra
 					nRGB2SpectSamples, wl0, wl1);
 				rgbIllum2SpectBlue.c[i] = Spectrum.AverageSpectrumSamples (SpectrumCIE.RGB2SpectLambda, SpectrumCIE.RGBIllum2SpectBlue,
 					nRGB2SpectSamples, wl0, wl1);
+			});
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public double y
+		{
+			get
+			{
+				var yy = 0.0;
+				for (var i = 0; i < NumberOfSpectralSamples; ++i)
+					yy += Y.c[i] * c[i];
+				return yy / yint;
 			}
 		}
 	}

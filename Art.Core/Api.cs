@@ -61,6 +61,10 @@ namespace Art.Core
 		/// 
 		/// </summary>
 		public const string Codename = @"Sluggy";
+		/// <summary>
+		/// 
+		/// </summary>
+		public static int NumberOfCores = 1;
 
 		/// <summary>
 		/// 
@@ -104,6 +108,7 @@ namespace Art.Core
 			Console.WriteLine ("> Host:   {0}", System.Environment.MachineName);
 			Console.WriteLine ("> System: {0}", System.Environment.OSVersion);
 			Console.WriteLine ("> Running on {0} of {1} cores", options.NumberOfCores, System.Environment.ProcessorCount);
+			NumberOfCores = options.NumberOfCores;
 			Console.Write ("> Initializing SampledSpectrum...");
 			SampledSpectrum.Init ();
 			Console.WriteLine ("[Done]");
