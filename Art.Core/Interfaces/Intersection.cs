@@ -68,6 +68,28 @@ namespace Art.Core.Interfaces
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="ray"></param>
+		/// <returns></returns>
+		public BSSRDF GetBSSRDF (RayDifferential ray)
+		{
+			this.dg.ComputeDifferentials (ray);
+			return this.Primitive.GetBSSRDF (this.dg, this.ObjectToWorld);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ray"></param>
+		/// <returns></returns>
+		public async Task<BSSRDF> GetBSSRDFAsync (RayDifferential ray)
+		{
+			this.dg.ComputeDifferentials (ray);
+			return await this.Primitive.GetBSSRDFAsync (this.dg, this.ObjectToWorld);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="wo"></param>
 		/// <returns></returns>
 		public Spectrum Le (Vector wo)

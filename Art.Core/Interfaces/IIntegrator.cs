@@ -18,6 +18,13 @@ namespace Art.Core.Interfaces
         /// <param name="camera"></param>
         /// <param name="renderer"></param>
         void Preprocess (Scene scene, ICamera camera, IRenderer renderer);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="scene"></param>
+		/// <param name="camera"></param>
+		/// <param name="renderer"></param>
+		void PreprocessAsync (Scene scene, ICamera camera, IRenderer renderer);
         /// <summary>
         /// 
         /// </summary>
@@ -25,5 +32,12 @@ namespace Art.Core.Interfaces
         /// <param name="sample"></param>
         /// <param name="scene"></param>
         void RequestSamples (ISampler sampler, Sample sample, Scene scene);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sampler"></param>
+		/// <param name="sample"></param>
+		/// <param name="scene"></param>
+		void RequestSamplesAsync (ISampler sampler, Sample sample, Scene scene);
     }
 }

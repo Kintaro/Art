@@ -31,6 +31,7 @@ namespace Art.Core.Geometry
         /// 
         /// </summary>
         public Vector ryDirection = new Vector ();
+		private Ray ray;
 
         /// <summary>
         /// 
@@ -52,6 +53,16 @@ namespace Art.Core.Geometry
             : base(origin, direction)
         {
         }
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ray"></param>
+		public RayDifferential (Ray ray)
+		{
+			// TODO: Complete member initialization
+			this.ray = ray;
+		}
 
         /// <summary>
         /// 

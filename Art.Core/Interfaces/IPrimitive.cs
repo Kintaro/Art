@@ -88,6 +88,20 @@ namespace Art.Core.Interfaces
 		/// <param name="objectToWorld"></param>
 		/// <returns></returns>
 		public abstract Task<BSDF> GetBSDFAsync (DifferentialGeometry dg, Transform objectToWorld);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="dg"></param>
+		/// <param name="objectToWorld"></param>
+		/// <returns></returns>
+		public abstract BSSRDF GetBSSRDF (DifferentialGeometry dg, Transform objectToWorld);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="dg"></param>
+		/// <param name="objectToWorld"></param>
+		/// <returns></returns>
+		public abstract Task<BSSRDF> GetBSSRDFAsync (DifferentialGeometry dg, Transform objectToWorld);
 
 		/// <summary>
 		/// 
