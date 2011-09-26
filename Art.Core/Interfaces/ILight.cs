@@ -16,6 +16,41 @@ namespace Art.Core.Interfaces
 		/// <summary>
 		/// 
 		/// </summary>
+		protected Transform LightToWorld;
+		/// <summary>
+		/// 
+		/// </summary>
+		protected Transform WorldToLight;
+		/// <summary>
+		/// 
+		/// </summary>
+		public readonly int NumberOfSamples;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="l2w"></param>
+		/// <param name="ns"></param>
+		protected ILight (Transform l2w, int ns = 1)
+		{
+			this.NumberOfSamples = ns;
+			this.LightToWorld = new Transform (l2w);
+			this.WorldToLight = new Transform (l2w.Inverse);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public abstract bool IsDeltaLight { get; }
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="scene"></param>
+		/// <returns></returns>
+		public abstract Spectrum Power (Scene scene);
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="p"></param>
 		/// <param name="wi"></param>
 		/// <returns></returns>

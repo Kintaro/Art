@@ -51,6 +51,15 @@ namespace Art.Core.Geometry
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="transform"></param>
+		public Transform (Transform transform)
+			: this (transform.Matrix, transform.InverseMatrix)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public Transform Transposed
 		{
 			get { return new Transform (this.m.Transposed, this.mInv.Transposed); }

@@ -46,6 +46,15 @@ namespace Art.Core.Geometry
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="n"></param>
+		public Normal (Normal n)
+			: this (n.x, n.y, n.z)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public bool HasNans
 		{
 			get { return double.IsNaN (x) || double.IsNaN (y) || double.IsNaN (y); }
