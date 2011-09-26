@@ -57,9 +57,30 @@ namespace Art.Core.Interfaces
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="ray"></param>
+		/// <returns></returns>
+		public async Task<BSDF> GetBSDFAsync (RayDifferential ray)
+		{
+			this.dg.ComputeDifferentials (ray);
+			return await this.Primitive.GetBSDFAsync (dg, this.ObjectToWorld);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="wo"></param>
 		/// <returns></returns>
 		public Spectrum Le (Vector wo)
+		{
+			return null;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="wo"></param>
+		/// <returns></returns>
+		public async Task<Spectrum> LeAsync (Vector wo)
 		{
 			return null;
 		}

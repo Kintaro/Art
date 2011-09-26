@@ -8,11 +8,11 @@ using Art.Core.Interfaces;
 
 namespace Art.Core
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    public class Scene
-    {
+	/// <summary>
+	/// 
+	/// </summary>
+	public class Scene
+	{
 		/// <summary>
 		/// 
 		/// </summary>
@@ -28,10 +28,10 @@ namespace Art.Core
 		/// <param name="ray"></param>
 		/// <param name="isect"></param>
 		/// <returns></returns>
-        public bool Intersect (Ray ray, Intersection isect)
-        {
+		public bool Intersect (Ray ray, Intersection isect)
+		{
 			return this.Aggregate.Intersect (ray, isect);
-        }
+		}
 
 		/// <summary>
 		/// 
@@ -63,5 +63,5 @@ namespace Art.Core
 		{
 			return await this.Aggregate.IntersectPAsync (ray);
 		}
-    }
+	}
 }

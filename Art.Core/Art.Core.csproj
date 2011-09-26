@@ -58,6 +58,7 @@
     <Compile Include="Interfaces\ICamera.cs" />
     <Compile Include="Interfaces\IFilm.cs" />
     <Compile Include="Interfaces\IIntegrator.cs" />
+    <Compile Include="Interfaces\IMaterial.cs" />
     <Compile Include="Interfaces\Intersection.cs" />
     <Compile Include="Interfaces\IPrimitive.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />

@@ -72,10 +72,22 @@ namespace Art.Core.Interfaces
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="refined"></param>
+		public abstract Task RefineAsync (IList<IPrimitive> refined);
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="dg"></param>
 		/// <param name="objectToWorld"></param>
 		/// <returns></returns>
 		public abstract BSDF GetBSDF (DifferentialGeometry dg, Transform objectToWorld);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="dg"></param>
+		/// <param name="objectToWorld"></param>
+		/// <returns></returns>
+		public abstract Task<BSDF> GetBSDFAsync (DifferentialGeometry dg, Transform objectToWorld);
 
 		/// <summary>
 		/// 
@@ -92,6 +104,24 @@ namespace Art.Core.Interfaces
 					refined.Add (primitive);
 				else
 					primitive.Refine (refined);
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="refined"></param>
+		public async void FullyRefineAsync (IList<IPrimitive> refined)
+		{
+			var todo = new Stack<IPrimitive> ();
+			todo.Push (this);
+			while (todo.Count > 0)
+			{
+				var primitive = todo.Pop ();
+				if (primitive.CanIntersect)
+					refined.Add (primitive);
+				else
+					await primitive.RefineAsync (refined);
 			}
 		}
 	}

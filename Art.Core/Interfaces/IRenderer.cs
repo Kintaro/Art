@@ -34,7 +34,25 @@ namespace Art.Core.Interfaces
 		/// <param name="scene"></param>
 		/// <param name="ray"></param>
 		/// <param name="sample"></param>
+		/// <param name="isect"></param>
+		/// <param name="T"></param>
+		/// <returns></returns>
+		Task<Spectrum> LiAsync (Scene scene, RayDifferential ray, Sample sample, Intersection isect = null, Spectrum T = null);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="scene"></param>
+		/// <param name="ray"></param>
+		/// <param name="sample"></param>
 		/// <returns></returns>
 		Spectrum Transmittance (Scene scene, RayDifferential ray, Sample sample);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="scene"></param>
+		/// <param name="ray"></param>
+		/// <param name="sample"></param>
+		/// <returns></returns>
+		Task<Spectrum> TransmittanceAsync (Scene scene, RayDifferential ray, Sample sample);
 	}
 }
