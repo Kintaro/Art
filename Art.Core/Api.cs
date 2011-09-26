@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Art.Core.Spectra;
 
 namespace Art.Core
 {
@@ -91,6 +92,36 @@ namespace Art.Core
 				}
 			}
 			return new DateTime ();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="options"></param>
+		public static void ArtInit (Options options)
+		{
+			options.NumberOfCores = Math.Min (options.NumberOfCores, System.Environment.ProcessorCount);
+			Console.WriteLine ("> Host:   {0}", System.Environment.MachineName);
+			Console.WriteLine ("> System: {0}", System.Environment.OSVersion);
+			Console.WriteLine ("> Running on {0} of {1} cores", options.NumberOfCores, System.Environment.ProcessorCount);
+			Console.Write ("> Initializing SampledSpectrum...");
+			SampledSpectrum.Init ();
+			Console.WriteLine ("[Done]");
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public static void ArtCleanup ()
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="filename"></param>
+		public static void ParseFile (string filename)
+		{
 		}
 	}
 }

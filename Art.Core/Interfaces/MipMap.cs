@@ -153,10 +153,10 @@ namespace Art.Core.Interfaces
 			dynamic ds = s - s0;
 			dynamic dt = t - t0;
 
-			return (1.0 - ds) * (1.0 - dt) * await this.Texel (level, s0, t0) +
-				(1.0 - ds) * dt * await this.Texel (level, s0, t0 + 1) +
-				ds * (1.0 - dt) * await this.Texel (level, s0 + 1, t0) +
-				ds * dt * await this.Texel (level, s0 + 1, t0 + 1);
+			return (1.0 - ds) * (1.0 - dt) * await this.TexelAsync (level, s0, t0) +
+				(1.0 - ds) * dt * await this.TexelAsync (level, s0, t0 + 1) +
+				ds * (1.0 - dt) * await this.TexelAsync (level, s0 + 1, t0) +
+				ds * dt * await this.TexelAsync (level, s0 + 1, t0 + 1);
 		}
 	}
 }
