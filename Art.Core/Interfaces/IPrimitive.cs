@@ -49,8 +49,21 @@ namespace Art.Core.Interfaces
 		/// 
 		/// </summary>
 		/// <param name="ray"></param>
+		/// <param name="intersection"></param>
+		/// <returns></returns>
+		public abstract Task<bool> IntersectAsync (Ray ray, Intersection intersection);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ray"></param>
 		/// <returns></returns>
 		public abstract bool IntersectP (Ray ray);
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ray"></param>
+		/// <returns></returns>
+		public abstract Task<bool> IntersectPAsync (Ray ray);
 		/// <summary>
 		/// 
 		/// </summary>

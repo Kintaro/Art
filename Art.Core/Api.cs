@@ -48,6 +48,18 @@ namespace Art.Core
 		/// 
 		/// </summary>
 		public static readonly DateTime BuildDate = GetBuildDateTime (Assembly.GetExecutingAssembly ());
+		/// <summary>
+		/// 
+		/// </summary>
+		public const string Author = @"Simon Wollwage";
+		/// <summary>
+		/// 
+		/// </summary>
+		public const string Name = @"Art - Async Ray Tracer";
+		/// <summary>
+		/// 
+		/// </summary>
+		public const string Codename = @"Sluggy";
 
 		/// <summary>
 		/// 
