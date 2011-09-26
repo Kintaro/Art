@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Art.Core.Interfaces;
 
 namespace Art.Core.Geometry
 {
@@ -46,6 +47,14 @@ namespace Art.Core.Geometry
 		/// <summary>
 		/// 
 		/// </summary>
+		public Normal dndu;
+		/// <summary>
+		/// 
+		/// </summary>
+		public Normal dndv;
+		/// <summary>
+		/// 
+		/// </summary>
 		public double dudx;
 		/// <summary>
 		/// 
@@ -59,6 +68,25 @@ namespace Art.Core.Geometry
 		/// 
 		/// </summary>
 		public double dvdy;
+		/// <summary>
+		/// 
+		/// </summary>
+		public IShape Shape;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public DifferentialGeometry ()
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="dgShading"></param>
+		public DifferentialGeometry (DifferentialGeometry dgShading)
+		{
+		}
 
 		/// <summary>
 		/// 

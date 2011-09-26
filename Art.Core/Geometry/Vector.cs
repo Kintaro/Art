@@ -60,6 +60,17 @@ namespace Art.Core.Geometry
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="p"></param>
+		public Vector (Normal n)
+		{
+			this.x = n.x;
+			this.y = n.y;
+			this.z = n.z;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
         public bool HasNans
         {
             get { return double.IsNaN (x) || double.IsNaN (y) || double.IsNaN (y); }

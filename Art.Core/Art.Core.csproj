@@ -67,6 +67,7 @@
     <Compile Include="Interfaces\ISampler.cs" />
     <Compile Include="Interfaces\IShape.cs" />
     <Compile Include="Interfaces\ISurfaceIntegrator.cs" />
+    <Compile Include="Interfaces\ITexture.cs" />
     <Compile Include="Interfaces\LightSample.cs" />
     <Compile Include="Interfaces\LightSampleOffsets.cs" />
     <Compile Include="Interfaces\Sample.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="Scene.cs" />
     <Compile Include="Spectra\CoefficientSpectrum.cs" />
     <Compile Include="Spectra\Spectrum.cs" />
+    <Compile Include="Tools\ProgressReporter.cs" />
+    <Compile Include="Tools\Timer.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
