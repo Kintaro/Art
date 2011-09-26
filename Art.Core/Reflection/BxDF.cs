@@ -93,9 +93,9 @@ namespace Art.Core.Reflection
 				var pdf = 0.0;
 				var f = SampleF (wo, ref wi, samples[2 * i], samples[2 * i + 1], ref pdf);
 				if (pdf > 0.0)
-					;// r += f * Util.AbsCosTheta (wi) / pdf;
+					r += f * Util.AbsCosTheta(wi) / pdf;
 			}
-			return null;// r / (double)nSamples;
+			return (Spectrum)(r / (double)nSamples);
 		}
 
 		/// <summary>
@@ -117,9 +117,9 @@ namespace Art.Core.Reflection
 				var f = SampleF (wo, ref wi, samples2[2 * i], samples2[2 * i + 1], ref pdf_i);
 
 				if (pdf_i > 0.0)
-					;// r += f * Util.AbsCosTheta (wi) * Util.AbsCosTheta (wo) / (pdf_o * pdf_i);
+					r += f * Util.AbsCosTheta (wi) * Util.AbsCosTheta (wo) / (pdf_o * pdf_i);
 			}
-			return null;// r / (Math.PI * nSamples);
+			return r / (Math.PI * nSamples);
 		}
 
 		/// <summary>

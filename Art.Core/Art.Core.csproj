@@ -67,6 +67,7 @@
     <Compile Include="Reflection\BSDF.cs" />
     <Compile Include="Reflection\BxDF.cs" />
     <Compile Include="Scene.cs" />
+    <Compile Include="Spectra\CoefficientSpectrum.cs" />
     <Compile Include="Spectra\Spectrum.cs" />
   </ItemGroup>
   <ItemGroup />
