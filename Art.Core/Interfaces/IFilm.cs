@@ -46,7 +46,7 @@ namespace Art.Core.Interfaces
 		/// <param name="xend"></param>
 		/// <param name="ystart"></param>
 		/// <param name="ystart"></param>
-		public abstract void GetSampleExtent (ref int xstart, ref int xend, ref int ystart, ref int ystart);
+		public abstract void GetSampleExtent (ref int xstart, ref int xend, ref int ystart, ref int yend);
 		/// <summary>
 		/// 
 		/// </summary>
@@ -54,7 +54,7 @@ namespace Art.Core.Interfaces
 		/// <param name="xend"></param>
 		/// <param name="ystart"></param>
 		/// <param name="ystart"></param>
-		public abstract void GetPixelExtent (ref int xstart, ref int xend, ref int ystart, ref int ystart);
+		public abstract void GetPixelExtent (ref int xstart, ref int xend, ref int ystart, ref int yend);
 		/// <summary>
 		/// 
 		/// </summary>

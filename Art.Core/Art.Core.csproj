@@ -56,8 +56,10 @@
     <Compile Include="Geometry\Vector.cs" />
     <Compile Include="Interfaces\CameraSample.cs" />
     <Compile Include="Interfaces\ICamera.cs" />
+    <Compile Include="Interfaces\IFilm.cs" />
     <Compile Include="Interfaces\IIntegrator.cs" />
     <Compile Include="Interfaces\Intersection.cs" />
+    <Compile Include="Interfaces\IPrimitive.cs" />
     <Compile Include="Interfaces\IRenderer.cs" />
     <Compile Include="Interfaces\ISampler.cs" />
     <Compile Include="Interfaces\ISurfaceIntegrator.cs" />

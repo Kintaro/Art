@@ -11,7 +11,7 @@ namespace Art.Core.Interfaces
 	/// <summary>
 	/// 
 	/// </summary>
-	public class IPrimitive
+	public abstract class IPrimitive
 	{
 		/// <summary>
 		/// 
