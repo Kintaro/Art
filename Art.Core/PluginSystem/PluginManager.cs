@@ -28,7 +28,7 @@ namespace Art.Core.PluginSystem
 		/// <returns></returns>
 		public static IShape CreateShape (string name, Transform objectToWorld, Transform worldToObject, bool reverseOrientation, ParameterSet parameters, Dictionary<string, ITexture<double>> floatTextures, Dictionary<string, ITexture<Spectrum>> spectrumTextures)
 		{
-			ShapePlugin plugin = new ShapePlugin (name);
+			var plugin = new ShapePlugin (name);
 			return plugin.CreateShape (objectToWorld, worldToObject, reverseOrientation, parameters, floatTextures, spectrumTextures);
 		} 
 	}

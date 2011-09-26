@@ -13,27 +13,27 @@ namespace Art.Core.Interfaces
 	public abstract class IShape
 	{
 		/// <summary>
-		/// 
+		///		The next shape's id when it is created
 		/// </summary>
 		public static int NextShapeID;
 		/// <summary>
-		/// 
+		///		Transformation from object coordinates to world coordinates
 		/// </summary>
 		public readonly Transform ObjectToWorld;
 		/// <summary>
-		/// 
+		///		Transformation from world coordinates to object coordinates
 		/// </summary>
 		public readonly Transform WorldToObject;
 		/// <summary>
-		/// 
+		///		True if the orientation is reversed
 		/// </summary>
 		public readonly bool ReverseOrientation;
 		/// <summary>
-		/// 
+		///		True if the transformation swaps handedness
 		/// </summary>
 		public readonly bool TransformSwapsHandedness;
 		/// <summary>
-		/// 
+		///		The shape's ID
 		/// </summary>
 		public readonly int ShapeID;
 
@@ -48,46 +48,47 @@ namespace Art.Core.Interfaces
 			this.ObjectToWorld = new Transform (o2w);
 			this.WorldToObject = new Transform (w2o);
 			this.ReverseOrientation = ro;
+			this.ShapeID = NextShapeID++;
 		}
 
 		/// <summary>
-		/// 
+		///		Determines whether the shape is able to compute intersections
 		/// </summary>
 		public virtual bool CanIntersect { get { throw new NotImplementedException (); } }
 		/// <summary>
-		/// 
+		///		Gets the shape's area
 		/// </summary>
 		public virtual double Area { get { throw new NotImplementedException (); } }
 
 		/// <summary>
-		/// 
+		///		Checks if the shape intersects the ray
 		/// </summary>
-		/// <param name="ray"></param>
-		/// <param name="tHit"></param>
-		/// <param name="rayEpsilon"></param>
-		/// <param name="dg"></param>
-		/// <returns></returns>
+		/// <param name="ray">The ray to test against</param>
+		/// <param name="tHit">If it intersects, the time where the ray was hit</param>
+		/// <param name="rayEpsilon">The sharpness of the hit</param>
+		/// <param name="dg">The differential geometry at the point of intersection</param>
+		/// <returns>True if it intersects</returns>
 		public virtual bool Intersect (Ray ray, out double tHit, out double rayEpsilon, DifferentialGeometry dg)
 		{
 			throw new NotImplementedException ();
 		}
 
 		/// <summary>
-		/// 
+		///		Computes the propability distribution function at the given point
 		/// </summary>
-		/// <param name="p"></param>
-		/// <returns></returns>
+		/// <param name="p">The point to check against</param>
+		/// <returns>The propability distribution function</returns>
 		public virtual double Pdf (Point p)
 		{
 			return 1.0 / this.Area;
 		}
 
 		/// <summary>
-		/// 
+		///		Computes the propability distribution function at the given point
 		/// </summary>
-		/// <param name="p"></param>
-		/// <param name="wi"></param>
-		/// <returns></returns>
+		/// <param name="p">The point to check against</param>
+		/// <param name="wi">The out vector</param>
+		/// <returns>The propability distribution function</returns>
 		public virtual double Pdf (Point p, Vector wi)
 		{
 			var dgLight = new DifferentialGeometry ();
@@ -97,14 +98,16 @@ namespace Art.Core.Interfaces
 
 			if (!this.Intersect (ray, out thit, out rayEpsilon, dgLight))
 				return 0.0;
+
 			var pdf = Util.DistanceSquared (p, ray.Apply (thit)) / (Util.AbsDot (dgLight.nn, -wi) * this.Area);
+
 			if (double.IsInfinity (pdf))
 				pdf = 0.0;
 			return pdf;
 		}
 
 		/// <summary>
-		/// 
+		///		
 		/// </summary>
 		/// <param name="u1"></param>
 		/// <param name="u2"></param>
@@ -163,7 +166,7 @@ namespace Art.Core.Interfaces
 		}
 
 		/// <summary>
-		/// 
+		///		Computes the shape's bounding box
 		/// </summary>
 		public abstract BoundingBox ObjectBound { get; }
 	}
