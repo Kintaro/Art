@@ -20,6 +20,10 @@ namespace Art.Core.Geometry
 		/// 
 		/// </summary>
 		public const double InvTwoPI = 1.0 / (2.0 * Math.PI);
+		/// <summary>
+		/// 
+		/// </summary>
+		public static readonly double InvLog2 = 1.0 / Math.Log (2.0);
 
 		/// <summary>
 		/// 
@@ -351,6 +355,16 @@ namespace Art.Core.Geometry
 		public static double AbsCosTheta(Vector w) 
 		{
 			return Math.Abs (w.z); ;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="x"></param>
+		/// <returns></returns>
+		public static double Log2 (double x)
+		{
+			return Math.Log(x) * InvLog2;
 		}
 	}
 }

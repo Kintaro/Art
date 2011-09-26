@@ -73,6 +73,7 @@
     <Compile Include="Interfaces\ITexture.cs" />
     <Compile Include="Interfaces\LightSample.cs" />
     <Compile Include="Interfaces\LightSampleOffsets.cs" />
+    <Compile Include="Interfaces\MipMap.cs" />
     <Compile Include="Interfaces\Sample.cs" />
     <Compile Include="Interfaces\ShapeSet.cs" />
     <Compile Include="Interfaces\VisibilityTester.cs" />
