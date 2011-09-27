@@ -390,5 +390,34 @@ namespace Art.Core.Geometry
 			if (a < 0) a += b;
 			return a;
 		}
+
+		public static int Log2Int(double v) 
+		{
+			return Floor2Int (Log2 (v));
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="tres"></param>
+		/// <returns></returns>
+		public static bool IsPowerOf2 (int v)
+		{
+			return (v & (v - 1)) == 0;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="sres"></param>
+		/// <returns></returns>
+		public static int RoundUpPow2 (int v)
+		{
+			v--;
+			v |= v >> 1; v |= v >> 2;
+			v |= v >> 4; v |= v >> 8;
+			v |= v >> 16;
+			return v + 1;
+		}
 	}
 }

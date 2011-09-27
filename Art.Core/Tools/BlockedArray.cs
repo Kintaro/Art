@@ -92,11 +92,11 @@ namespace Art.Core.Tools
 			uRes = nu;
 			vRes = nv;
 			uBlocks = RoundUp (uRes) >> logBlockSize;
-			int nAlloc = RoundUp (uRes) * RoundUp (vRes);
+			var nAlloc = RoundUp (uRes) * RoundUp (vRes);
 			data = new T[nAlloc];
 
-			Thread lower = new Thread (delegate () { Initialize (ref data, 0, data.Length / 2); });
-			Thread upper = new Thread (delegate () { Initialize (ref data, data.Length / 2, data.Length / 2); });
+			var lower = new Thread (delegate () { Initialize (ref data, 0, data.Length / 2); });
+			var upper = new Thread (delegate () { Initialize (ref data, data.Length / 2, data.Length / 2); });
 			lower.Start ();
 			upper.Start ();
 
@@ -109,6 +109,18 @@ namespace Art.Core.Tools
 			for (int v = 0; v < nv; ++v)
 				for (int u = 0; u < nu; ++u)
 					Set (u, v, d[v * uRes + u]);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <returns></returns>
+		public T this[int a, int b]
+		{
+			get { return this.Get (a, b); }
+			set { this.Set (a, b, value); }
 		}
 
 		/// <summary>

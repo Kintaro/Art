@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Art.Core.Geometry;
+using Art.Core.Spectra;
 using Art.Core.Tools;
 
 namespace Art.Core.Interfaces
@@ -88,6 +89,153 @@ namespace Art.Core.Interfaces
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="sres"></param>
+		/// <param name="tres"></param>
+		/// <param name="img"></param>
+		/// <param name="doTri"></param>
+		/// <param name="maxAniso"></param>
+		/// <param name="wm"></param>
+		public MipMap (int sres, int tres, T[] img, bool doTri, double maxAniso, ImageWrap wm)
+		{
+			this.doTrilinear = doTri;
+			this.maxAnisotropy = maxAniso;
+			this.wrapMode = wm;
+			T[] resampledImage = null;
+			if (!Util.IsPowerOf2 (sres) || !Util.IsPowerOf2 (tres))
+			{
+				// Resample image to power-of-two resolution
+				var sPow2 = Util.RoundUpPow2 (sres);
+				var tPow2 = Util.RoundUpPow2 (tres);
+
+				// Resample image in $s$ direction
+				var sWeights = this.ResampleWeights (sres, sPow2);
+				resampledImage = new T[sPow2 * tPow2];
+
+				// Apply _sWeights_ to zoom in $s$ direction
+				var cores = Math.Max (1, Api.NumberOfCores >> 1);
+				Parallel.For (0, tres, new ParallelOptions { MaxDegreeOfParallelism = cores }, t =>
+				{
+					Parallel.For (0, sPow2, new ParallelOptions { MaxDegreeOfParallelism = cores }, s =>
+					{
+						// Compute texel $(s,t)$ in $s$-zoomed image
+						resampledImage[t * sPow2 + s] = default (T);
+						for (int j = 0; j < 4; ++j)
+						{
+							int origS = sWeights[s].FirstTexel + j;
+							if (wrapMode == ImageWrap.Repeat)
+								origS = Util.Mod (origS, sres);
+							else if (wrapMode == ImageWrap.Clamp)
+								origS = Util.Clamp (origS, 0, sres - 1);
+							if (origS >= 0 && origS < (int)sres)
+							{
+								dynamic a = sWeights[s].Weight[j];
+								dynamic b = img[t * sres + origS];
+								dynamic val = a * b;
+								resampledImage[t * sPow2 + s] += val;
+							}
+						}
+					});
+				});
+
+				// Resample image in $t$ direction
+				var tWeights = this.ResampleWeights (tres, tPow2);
+				var workData = new T[tPow2];
+				for (var s = 0; s < sPow2; ++s)
+				{
+					for (var t = 0; t < tPow2; ++t)
+					{
+						workData[t] = default (T);
+						for (var j = 0; j < 4; ++j)
+						{
+							int offset = tWeights[t].FirstTexel + j;
+							if (wrapMode == ImageWrap.Repeat) offset = Util.Mod (offset, tres);
+							else if (wrapMode == ImageWrap.Clamp) offset = Util.Clamp (offset, 0, tres - 1);
+							if (offset >= 0 && offset < (int)tres)
+							{
+								dynamic a = tWeights[t].Weight[j];
+								dynamic b = resampledImage[offset * sPow2 + s];
+								workData[t] += a * b;
+							}
+						}
+					}
+					for (var t = 0; t < tPow2; ++t)
+					{
+						dynamic v = workData[t];
+						dynamic val = this.Clamp (v);
+						resampledImage[t * sPow2 + s] = val;
+					}
+				}
+
+				img = resampledImage;
+				sres = sPow2;
+				tres = tPow2;
+			}
+			this.Width = sres;
+			this.Height = tres;
+			// Initialize levels of MIPMap from image
+			this.Levels = 1 + Util.Log2Int (Math.Max (sres, tres));
+			pyramid = new BlockedArray<T>[this.Levels];
+
+			// Initialize most detailed level of MIPMap
+			pyramid[0] = new BlockedArray<T> (sres, tres, img);
+			for (var i = 1; i < this.Levels; ++i)
+			{
+				// Initialize $i$th MIPMap level from $i-1$st level
+				var sRes = (int)Math.Max (1u, pyramid[i - 1].uSize / 2);
+				var tRes = (int)Math.Max (1u, pyramid[i - 1].vSize / 2);
+				pyramid[i] = new BlockedArray<T> (sRes, tRes);
+
+				// Filter four texels from finer level of pyramid
+				for (var t = 0; t < tRes; ++t)
+				{
+					for (var s = 0; s < sRes; ++s)
+					{
+						dynamic a = this.Texel (i - 1, 2 * s, 2 * t);
+						dynamic b = this.Texel (i - 1, 2 * s + 1, 2 * t);
+						dynamic c = this.Texel (i - 1, 2 * s, 2 * t + 1);
+						dynamic d = this.Texel (i - 1, 2 * s + 1, 2 * t + 1);
+						dynamic val = .25 * a + b + c + d;
+						pyramid[i][s, t] = val;
+					}
+				}
+			}
+
+			// Initialize EWA filter weights if needed
+			if (weightLut == null)
+			{
+				weightLut = new double[WeightLutSize];
+				for (int i = 0; i < WeightLutSize; ++i)
+				{
+					var alpha = 2;
+					var r2 = (double)(i) / (double)(WeightLutSize - 1);
+					weightLut[i] = Math.Exp (-alpha * r2) - Math.Exp (-alpha);
+				}
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="t"></param>
+		/// <returns></returns>
+		private double Clamp (double t)
+		{
+			return Util.Clamp (t, 0, double.PositiveInfinity);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="v"></param>
+		/// <returns></returns>
+		private SampledSpectrum Clamp (SampledSpectrum v)
+		{
+			return null;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="level"></param>
 		/// <param name="s"></param>
 		/// <param name="t"></param>
@@ -113,7 +261,7 @@ namespace Art.Core.Interfaces
 					break;
 			}
 
-			return l.Get (s, t);
+			return l[s, t];
 		}
 
 		/// <summary>
