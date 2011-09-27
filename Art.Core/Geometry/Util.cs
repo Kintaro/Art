@@ -366,5 +366,29 @@ namespace Art.Core.Geometry
 		{
 			return Math.Log(x) * InvLog2;
 		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="p"></param>
+		/// <returns></returns>
+		public static double Lanczos (double p)
+		{
+			throw new NotImplementedException ();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="a"></param>
+		/// <param name="b"></param>
+		/// <returns></returns>
+		public static int Mod (int a, int b)
+		{
+			var n = (int)(a / b);
+			a -= n * b;
+			if (a < 0) a += b;
+			return a;
+		}
 	}
 }

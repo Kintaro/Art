@@ -90,6 +90,7 @@
     <Compile Include="Spectra\SampledSpectrum.cs" />
     <Compile Include="Spectra\Spectrum.cs" />
     <Compile Include="Spectra\Spectrum_CIE.cs" />
+    <Compile Include="Tools\BlockedArray.cs" />
     <Compile Include="Tools\ParameterSet.cs" />
     <Compile Include="Tools\ProgressReporter.cs" />
     <Compile Include="Tools\Timer.cs" />
