@@ -372,9 +372,17 @@ namespace Art.Core.Geometry
 		/// </summary>
 		/// <param name="p"></param>
 		/// <returns></returns>
-		public static double Lanczos (double p)
+		public static double Lanczos (double x, double tau = 2.0)
 		{
-			throw new NotImplementedException ();
+			x = Math.Abs (x);
+			if (x < 1e-5)
+				return 1;
+			if (x > 1.0)
+				return 0;
+			x *= Math.PI;
+			var s = Math.Sin (x * tau) / (x * tau);
+			var lanczos = Math.Sin (x) / x;
+			return s * lanczos;
 		}
 
 		/// <summary>

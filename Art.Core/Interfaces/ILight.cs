@@ -41,6 +41,43 @@ namespace Art.Core.Interfaces
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="r"></param>
+		/// <returns></returns>
+		public virtual Spectrum Le (RayDifferential r)
+		{
+			return new Spectrum ();
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="p"></param>
+		/// <param name="pEpsilon"></param>
+		/// <param name="lmax"></param>
+		/// <param name="scene"></param>
+		/// <param name="computeLightVisibility"></param>
+		/// <param name="time"></param>
+		/// <param name="coeffs"></param>
+		public virtual void SHProject (Point p, double pEpsilon, int lmax, Scene scene, bool computeLightVisibility, double time, Spectrum[] coeffs)
+		{
+			for (var i = 0; i < Sh.SHTerms (lmax); ++i)
+				coeffs[i] = new Spectrum ();
+			var ns = Util.RoundUpPow2 (this.NumberOfSamples);
+			var scramble1D = Api.Random.Next ();
+			var scramble2D = new int[] { Api.Random.Next (), Api.Random.Next () };
+			var Ylm = new double[Sh.SHTerms (lmax)];
+
+			for (var i = 0; i < ns; ++i)
+			{
+				var u = new double[2];
+				var pdf = 0.0;
+				var lightSample = new LightSample (u[0], u[1], MonteCarlo.VanDerCorput (i, scramble1D));
+			}
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		public abstract bool IsDeltaLight { get; }
 		/// <summary>
 		/// 

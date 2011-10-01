@@ -14,6 +14,11 @@ namespace Art.Core.Geometry
 		/// <summary>
 		/// 
 		/// </summary>
+		public const double OneMinusEpsilon = 1.0 - double.Epsilon;
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="u1"></param>
 		/// <param name="u2"></param>
 		/// <returns></returns>
@@ -98,6 +103,23 @@ namespace Art.Core.Geometry
 			theta *= Math.PI / 4.0;
 			dx = r * Math.Cos (theta);
 			dy = r * Math.Sin (theta);
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="n"></param>
+		/// <param name="scramble"></param>
+		/// <returns></returns>
+		public static double VanDerCorput(int n, int scramble) 
+		{
+			n = (n << 16) | (n >> 16);
+			n = ((int)(n & 0x00ff00ff) << 8) | ((int)(n & 0xff00ff00) >> 8);
+			n = ((int)(n & 0x0f0f0f0f) << 4) | ((int)(n & 0xf0f0f0f0) >> 4);
+			n = ((int)(n & 0x33333333) << 2) | ((int)(n & 0xcccccccc) >> 2);
+			n = ((int)(n & 0x55555555) << 1) | ((int)(n & 0xaaaaaaaa) >> 1);
+			n ^= scramble;
+			return Math.Min(((n>>8) & 0xffffff) / (double)(1 << 24), OneMinusEpsilon);
 		}
 	}
 }

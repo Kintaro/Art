@@ -71,10 +71,12 @@
     <Compile Include="Interfaces\IShape.cs" />
     <Compile Include="Interfaces\ISurfaceIntegrator.cs" />
     <Compile Include="Interfaces\ITexture.cs" />
+    <Compile Include="Interfaces\IVolumeIntegrator.cs" />
     <Compile Include="Interfaces\LightSample.cs" />
     <Compile Include="Interfaces\LightSampleOffsets.cs" />
     <Compile Include="Interfaces\MipMap.cs" />
     <Compile Include="Interfaces\Sample.cs" />
+    <Compile Include="Interfaces\Sh.cs" />
     <Compile Include="Interfaces\ShapeSet.cs" />
     <Compile Include="Interfaces\VisibilityTester.cs" />
     <Compile Include="Options.cs" />

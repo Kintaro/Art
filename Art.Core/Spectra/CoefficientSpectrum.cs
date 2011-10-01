@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Art.Core.Geometry;
 
 namespace Art.Core.Spectra
 {
@@ -132,6 +133,28 @@ namespace Art.Core.Spectra
 			xyz[0] = 0.412453 * rgb[0] + 0.357580 * rgb[1] + 0.180423 * rgb[2];
 			xyz[1] = 0.212671 * rgb[0] + 0.715160 * rgb[1] + 0.072169 * rgb[2];
 			xyz[2] = 0.019334 * rgb[0] + 0.119193 * rgb[1] + 0.950227 * rgb[2];
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="low"></param>
+		/// <param name="high"></param>
+		/// <returns></returns>
+		public virtual dynamic Clamp (double low = 0.0, double high = double.PositiveInfinity)
+		{
+			var result = this.Clone ();
+			result.c = this.c.Select (x => Util.Clamp (x, low, high)) as double[];
+			return result;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public virtual dynamic Clone ()
+		{
+			return new CoefficientSpectrum (this.nSamples);
 		}
 	}
 }

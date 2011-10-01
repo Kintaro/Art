@@ -253,10 +253,8 @@ namespace Art.Core.Geometry
 					return false;
 			}
 
-			if (hitt0 != null)
-				hitt0 = t0;
-			if (hitt1 != null)
-				hitt1 = t1;
+			hitt0 = t0;
+			hitt1 = t1;
 
 			return true;
 		}

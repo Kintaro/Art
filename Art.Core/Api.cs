@@ -65,6 +65,10 @@ namespace Art.Core
 		/// 
 		/// </summary>
 		public static int NumberOfCores = 1;
+		/// <summary>
+		/// 
+		/// </summary>
+		public static Random Random = new Random ();
 
 		/// <summary>
 		/// 

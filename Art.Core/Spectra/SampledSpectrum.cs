@@ -177,5 +177,10 @@ namespace Art.Core.Spectra
 				return yy / yint;
 			}
 		}
+
+		public override dynamic Clone ()
+		{
+			return new SampledSpectrum ();
+		}
 	}
 }
