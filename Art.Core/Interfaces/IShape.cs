@@ -74,6 +74,16 @@ namespace Art.Core.Interfaces
 		}
 
 		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="ray"></param>
+		/// <returns></returns>
+		public virtual bool IntersectP (Ray ray)
+		{
+			throw new NotImplementedException ();
+		}
+
+		/// <summary>
 		///		Computes the propability distribution function at the given point
 		/// </summary>
 		/// <param name="p">The point to check against</param>

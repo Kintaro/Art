@@ -10,12 +10,21 @@ namespace Art.Core.Geometry
 	/// <summary>
 	/// 
 	/// </summary>
-	public struct Matrix
+	public class Matrix
 	{
 		/// <summary>
 		/// 
 		/// </summary>
 		public double[] m;
+
+		/// <summary>
+		/// 
+		/// </summary>
+		public Matrix ()
+		{
+			this.m = new double[16];
+			this.m[0] = this.m[5] = this.m[10] = this.m[15] = 1.0;
+		}
 
 		/// <summary>
 		/// 
@@ -75,6 +84,18 @@ namespace Art.Core.Geometry
 			m[13] = t31;
 			m[14] = t32;
 			m[15] = t33;
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="row"></param>
+		/// <param name="col"></param>
+		/// <returns></returns>
+		public double this[int row, int col]
+		{
+			get { return this.m[4 * row + col]; }
+			set { this.m[4 * row + col] = value; }
 		}
 
 		/// <summary>

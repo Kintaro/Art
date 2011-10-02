@@ -91,6 +91,21 @@ namespace Art.Core.Geometry
 		/// <summary>
 		/// 
 		/// </summary>
+		/// <param name="p"></param>
+		/// <param name="dpdu"></param>
+		/// <param name="dpdv"></param>
+		/// <param name="dndu"></param>
+		/// <param name="dndv"></param>
+		/// <param name="u"></param>
+		/// <param name="v"></param>
+		/// <param name="shape"></param>
+		public DifferentialGeometry (Point p, Vector dpdu, Vector dpdv, Normal dndu, Normal dndv, double u, double v, IShape shape)
+		{
+		}
+
+		/// <summary>
+		/// 
+		/// </summary>
 		/// <param name="ray"></param>
 		public void ComputeDifferentials (RayDifferential ray)
 		{

@@ -94,6 +94,7 @@
     <Compile Include="Spectra\Spectrum_CIE.cs" />
     <Compile Include="Tools\BlockedArray.cs" />
     <Compile Include="Tools\ParameterSet.cs" />
+    <Compile Include="Tools\ParameterSetItem.cs" />
     <Compile Include="Tools\ProgressReporter.cs" />
     <Compile Include="Tools\Timer.cs" />
   </ItemGroup>
